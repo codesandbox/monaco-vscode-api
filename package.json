@@ -1,6 +1,6 @@
 {
   "name": "@codesandbox/monaco-vscode-api",
-  "version": "1.81.5-csb.1",
+  "version": "1.81.5-csb.2",
   "private": false,
   "description": "VSCode public API plugged on the monaco editor",
   "keywords": [],

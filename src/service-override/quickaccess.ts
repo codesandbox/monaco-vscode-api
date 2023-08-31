@@ -3,13 +3,11 @@ import { SyncDescriptor } from 'vs/platform/instantiation/common/descriptors'
 import { IInputBox, IInputOptions, IPickOptions, IQuickInputButton, IQuickInputService, IQuickNavigateConfiguration, IQuickPick, IQuickPickItem, QuickPickInput } from 'vs/platform/quickinput/common/quickInput'
 import { CancellationToken } from 'vs/base/common/cancellation'
 import { StandaloneQuickInputService } from 'vs/editor/standalone/browser/quickInput/standaloneQuickInputService'
-import { IEditorOverrideServices, StandaloneServices } from 'vs/editor/standalone/browser/standaloneServices'
+import { IEditorOverrideServices } from 'vs/editor/standalone/browser/standaloneServices'
 import { IInstantiationService } from 'vs/platform/instantiation/common/instantiation'
 import { QuickInputController } from 'vs/platform/quickinput/browser/quickInput'
 import { IQuickAccessController } from 'vs/platform/quickinput/common/quickAccess'
 import { QuickInputService } from 'vs/workbench/services/quickinput/browser/quickInputService'
-import { ICodeEditorService } from 'vs/editor/browser/services/codeEditorService'
-import { StandaloneCodeEditor } from 'vs/editor/standalone/browser/standaloneCodeEditor'
 import { CommandsQuickAccessProvider } from 'vs/workbench/contrib/quickaccess/browser/commandsQuickAccess'
 import 'vs/workbench/contrib/codeEditor/browser/quickaccess/gotoLineQuickAccess'
 import 'vs/workbench/contrib/codeEditor/browser/quickaccess/gotoSymbolQuickAccess'
@@ -49,8 +47,7 @@ class DelegateQuickInputService implements IQuickInputService {
   }
 
   private get activeService (): IQuickInputService {
-    const activeCodeEditor = StandaloneServices.get(ICodeEditorService).getFocusedCodeEditor()
-    if (!(activeCodeEditor instanceof StandaloneCodeEditor) && shouldUseGlobalPicker()) {
+    if (shouldUseGlobalPicker()) {
       return this.workbenchQuickInputService
     }
 
